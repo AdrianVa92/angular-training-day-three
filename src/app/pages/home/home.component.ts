@@ -8,17 +8,26 @@ import { Login } from './login-model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  isLogged: any;
 
   logins: Login = {
     username: '',
     password: ''
   };
 
-  constructor(private _globalService: GlobalService ) { }
+  constructor(private _globalService: GlobalService ) {
+    this.isLogged = false;
+  }
 
   ngOnInit(): void {
+    this._globalService.isLogged.subscribe(
+      (logged: any) => {
+        console.log('isLogged', logged);
+        this.isLogged = logged;
+      }
+    );
 
-    
+    this._globalService.checkLogStatus();
   }
   onLogin(): void {
     this._globalService.httpLogin(this.logins);
@@ -29,5 +38,8 @@ export class HomeComponent implements OnInit {
         console.log('token',token);
       }
     );
+  }
+  onLogout(): void {
+    this._globalService.deleteToken();
   }
 }

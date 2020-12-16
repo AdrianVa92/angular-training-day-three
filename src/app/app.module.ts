@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomeComponent,
     MyProfileComponent,
     NavComponent,
-    NotFoundComponent
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
