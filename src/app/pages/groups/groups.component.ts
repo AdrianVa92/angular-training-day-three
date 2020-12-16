@@ -13,9 +13,9 @@ export class GroupsComponent implements OnInit {
 
   ngOnInit(): void {
     this._globalService.httpGetProfile();
-    this.getUsers();
+    this.getGroups();
   }
-  getUsers(){
+  getGroups(){
     this._globalService.onHttpGetProfile.subscribe(
       (res: any) => {
         this.groups = res.tag.groups;
