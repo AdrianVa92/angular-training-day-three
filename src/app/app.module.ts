@@ -12,6 +12,7 @@ import { MyProfileComponent } from './pages/my-profile/my-profile.component';
 import { NavComponent } from './nav/nav.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { HttpClientModule } from '@angular/common/http';
+import { GroupsComponent } from './pages/groups/groups.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     MyProfileComponent,
     NavComponent,
     NotFoundComponent,
+    GroupsComponent,
   ],
   imports: [
     BrowserModule,

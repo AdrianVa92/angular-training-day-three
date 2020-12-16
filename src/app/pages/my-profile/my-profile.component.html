@@ -1,69 +1,76 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="form-group col-sm-6">
-            <label for="email">Email</label>
-            <input type="text" formControlName="email" class="form-control">
-            <div *ngIf="profileForm.get('email').hasError('required') && profileForm.get('email').touched" class="alert alert-danger">
-                Email Required
-            </div>
-            <div *ngIf="profileForm.get('email').hasError('email') && profileForm.get('email').touched" class="alert alert-danger">
-                Email Not Valid
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="my-5">
+    <div class="card">
+        <div class="card-header">
+            <h3>Profile</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="email">Email</label>
+                    <input type="text" formControlName="email" class="form-control">
+                    <div *ngIf="profileForm.get('email').hasError('required') && profileForm.get('email').touched" class="alert alert-danger">
+                        Email Required
+                    </div>
+                    <div *ngIf="profileForm.get('email').hasError('email') && profileForm.get('email').touched" class="alert alert-danger">
+                        Email Not Valid
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="first-name">First Name</label>
+                    <input type="text" formControlName="first_name" class="form-control" 
+                        [ngClass]="{'is-invalid': !profileForm.get('first_name').valid && profileForm.get('first_name').touched, 
+                        'is-valid': !profileForm.get('first_name').invalid && profileForm.get('first_name').touched 
+                    }">
+                    <div *ngIf="!profileForm.get('first_name').valid && profileForm.get('first_name').touched" class="alert alert-danger">
+                        First Name Required
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" formControlName="last_name" class="form-control">
+                    <div *ngIf="!profileForm.get('last_name').valid && profileForm.get('last_name').touched" class="alert alert-danger">
+                        Last Name Required
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="alias">Alias</label>
+                    <input type="text" formControlName="alias" class="form-control">
+                    <div *ngIf="!profileForm.get('alias').valid && profileForm.get('alias').touched" class="alert alert-danger">
+                        Alias Required
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="job_title">Job Title</label>
+                    <input type="text" formControlName="job_title" class="form-control">
+                    <div *ngIf="!profileForm.get('job_title').valid && profileForm.get('job_title').touched" class="alert alert-danger">
+                        Job Title Required
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="mobile_number">Mobile Number</label>
+                    <input type="text" formControlName="mobile_number" class="form-control">
+                    <div *ngIf="!profileForm.get('mobile_number').valid && profileForm.get('mobile_number').touched" class="alert alert-danger">
+                        Mobile Number Required
+                    </div>
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="confirm_password">Confirm Password</label>
+                    <input type="password" formControlName="confirm_password" class="form-control">
+                </div>
+            </div>  
+        </div>
+        <div class="card-footer">
+            <div class="form-group col-sm-12">
+                <button class="btn btn-block btn-info" >Submit</button>
+                <div *ngIf="!isLogged" class="text-right my-5">
+                    <button class="btn btn-danger btn-block" (click)="onLogout()">Logout</button>
+                </div>
             </div>
         </div>
-        <div class="form-group col-sm-6">
-            <label for="first-name">First Name</label>
-            <input type="text" formControlName="first_name" class="form-control" 
-                [ngClass]="{'is-invalid': !profileForm.get('first_name').valid && profileForm.get('first_name').touched, 
-                'is-valid': !profileForm.get('first_name').invalid && profileForm.get('first_name').touched 
-            }">
-            <div *ngIf="!profileForm.get('first_name').valid && profileForm.get('first_name').touched" class="alert alert-danger">
-                First Name Required
-            </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="last_name">Last Name</label>
-            <input type="text" formControlName="last_name" class="form-control">
-            <div *ngIf="!profileForm.get('last_name').valid && profileForm.get('last_name').touched" class="alert alert-danger">
-                Last Name Required
-            </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="alias">Alias</label>
-            <input type="text" formControlName="alias" class="form-control">
-            <div *ngIf="!profileForm.get('alias').valid && profileForm.get('alias').touched" class="alert alert-danger">
-                Alias Required
-            </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="job_title">Job Title</label>
-            <input type="text" formControlName="job_title" class="form-control">
-            <div *ngIf="!profileForm.get('job_title').valid && profileForm.get('job_title').touched" class="alert alert-danger">
-                Job Title Required
-            </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="mobile_number">Mobile Number</label>
-            <input type="text" formControlName="mobile_number" class="form-control">
-            <div *ngIf="!profileForm.get('mobile_number').valid && profileForm.get('mobile_number').touched" class="alert alert-danger">
-                Mobile Number Required
-            </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" class="form-control">
-            <div *ngIf="!profileForm.get('password').valid && profileForm.get('password').touched" class="alert alert-danger">
-                Password Required
-            </div>
-        </div>
-        <div class="form-group col-sm-6">
-            <label for="confirm_password">Confirm Password</label>
-            <input type="password" formControlName="confirm_password" class="form-control">
-            <div *ngIf="!profileForm.get('confirm_password').valid && profileForm.get('confirm_password').touched" class="alert alert-danger">
-                Confirm Password Required
-            </div>
-        </div>
-        <div class="form-group col-sm-12">
-            <button class="btn btn-block btn-info" >Submit</button>
-        </div>
-    </div>  
+    </div>
+    
 </form>

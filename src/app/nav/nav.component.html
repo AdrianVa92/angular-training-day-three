@@ -1,4 +1,5 @@
 <ul class="nav flex-column nav-pills">
-    <li class="nav-item" > <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a> </li>
-    <li class="nav-item"> <a class="nav-link" routerLink="/my-profile" routerLinkActive="active">My Profile</a> </li>
+    <li class="nav-item" *ngIf="!isLogged"> <a class="nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a> </li>
+    <li class="nav-item" *ngIf="isLogged"> <a class="nav-link" routerLink="/my-profile" routerLinkActive="active">My Profile</a> </li>
+    <li class="nav-item" *ngIf="isLogged"> <a class="nav-link" routerLink="/group" routerLinkActive="active">Groups</a> </li>
  </ul>

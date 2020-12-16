@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { fromEventPattern } from 'rxjs';
 import { GlobalService } from 'src/app/services/global.service';
 import { Profile } from './profile-model';
@@ -10,7 +11,8 @@ import { Profile } from './profile-model';
   styleUrls: ['./my-profile.component.scss']
 })
 export class MyProfileComponent implements OnInit {
-
+  isLogged: any;
+  
   profileForm: any;
 
   profile: Profile = {
@@ -23,10 +25,21 @@ export class MyProfileComponent implements OnInit {
     password: ''
   };
 
-  constructor(private _globalService: GlobalService) { }
+  constructor(private _globalService: GlobalService, private router: Router) {
+    this.isLogged = false;
+
+    this._globalService.isLogged.subscribe(
+      (logged: any) => {
+        console.log('isLogged', logged);
+        this.isLogged = logged;
+      }
+    );
+   }
 
   ngOnInit(): void {
+    
     this._globalService.httpGetProfile();
+    
     this._globalService.onHttpGetProfile.subscribe(
       (profile: any) => {
         console.log('this is from my profile ts', profile);
@@ -76,5 +89,9 @@ export class MyProfileComponent implements OnInit {
     } else {
       alert('Invalid Form!');
     }
+  }
+  onLogout(): void {
+    this._globalService.deleteToken();
+    this.router.navigate(['/']);
   }
 }
